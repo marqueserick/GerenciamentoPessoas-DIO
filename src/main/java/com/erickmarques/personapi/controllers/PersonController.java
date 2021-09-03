@@ -2,27 +2,25 @@ package com.erickmarques.personapi.controllers;
 
 import com.erickmarques.personapi.dto.response.MessageResponseDTO;
 import com.erickmarques.personapi.entities.Person;
-import com.erickmarques.personapi.repositories.PersonRepository;
+import com.erickmarques.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/people")
 public class PersonController {
-
-    private PersonRepository personRepository;
+    private PersonService personService;
 
     @Autowired
-    public PersonController(PersonRepository personRepository){
-        this.personRepository = personRepository;
+    public PersonController(PersonService personService) {
+        this.personService = personService;
     }
-    
-    @PostMapping
-    public MessageResponseDTO createPerson(@RequestBody Person person){
-        Person createdPerson = personRepository.save(person);
 
-        return MessageResponseDTO.builder()
-                .message("Created person with ID"+createdPerson.getId()).build();
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public MessageResponseDTO createPerson(@RequestBody Person person){
+        return personService.create(person);
     }
 
 }
