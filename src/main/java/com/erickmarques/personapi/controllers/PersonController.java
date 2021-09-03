@@ -10,7 +10,7 @@ public class PersonController {
 
     @GetMapping
     public String testingGet(){
-        return "initializing PersonApi";
+        return "initializing PersonApi...";
     }
 
 }
