@@ -1,6 +1,8 @@
 package com.erickmarques.personapi.entities;
 
+import ch.qos.logback.classic.spi.LoggingEventVO;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,6 +13,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Person {
