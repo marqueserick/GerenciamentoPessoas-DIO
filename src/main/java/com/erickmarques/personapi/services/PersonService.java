@@ -5,14 +5,15 @@ import com.erickmarques.personapi.dto.request.PersonDTO;
 import com.erickmarques.personapi.dto.response.MessageResponseDTO;
 import com.erickmarques.personapi.entities.Person;
 import com.erickmarques.personapi.repositories.PersonRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class PersonService {
-    private PersonRepository personRepository;
-    private PersonMapper personMapper;
+
+    private final PersonRepository personRepository;
+    private final PersonMapper personMapper;
 
     @Autowired
     public PersonService(PersonRepository personRepository, PersonMapper personMapper){

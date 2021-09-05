@@ -2,6 +2,8 @@ package com.erickmarques.personapi.dto.mappers;
 
 import com.erickmarques.personapi.dto.request.PersonDTO;
 import com.erickmarques.personapi.entities.Person;
+import org.mapstruct.InheritConfiguration;
+import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
@@ -11,7 +13,8 @@ public interface PersonMapper {
 
     PersonMapper INSTANCE = Mappers.getMapper(PersonMapper.class);
 
-    @Mapping(target = "birthDate", source = "birthDate", dateFormat = "dd-MM-yyyy")
+    @Mapping(target = "birthDate", source="birthDate", dateFormat = "dd-MM-yyyy")
     Person toModel(PersonDTO dto);
+    @InheritInverseConfiguration
     PersonDTO toDTO (Person dto);
 }
