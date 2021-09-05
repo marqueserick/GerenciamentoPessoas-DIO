@@ -3,6 +3,7 @@ package com.erickmarques.personapi.controllers;
 import com.erickmarques.personapi.dto.request.PersonDTO;
 import com.erickmarques.personapi.dto.response.MessageResponseDTO;
 import com.erickmarques.personapi.entities.Person;
+import com.erickmarques.personapi.exceptions.PersonNotFoundException;
 import com.erickmarques.personapi.services.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,6 +31,10 @@ public class PersonController {
     @GetMapping(value = "/all")
     public List<PersonDTO> listAll(){
         return personService.listAll();
+    }
+    @GetMapping(value = "/{id}")
+    public PersonDTO findByID(@PathVariable Long id) throws PersonNotFoundException {
+        return personService.findById(id);
     }
 
 }

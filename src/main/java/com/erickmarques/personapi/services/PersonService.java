@@ -4,12 +4,13 @@ import com.erickmarques.personapi.dto.mappers.PersonMapper;
 import com.erickmarques.personapi.dto.request.PersonDTO;
 import com.erickmarques.personapi.dto.response.MessageResponseDTO;
 import com.erickmarques.personapi.entities.Person;
+import com.erickmarques.personapi.exceptions.PersonNotFoundException;
 import com.erickmarques.personapi.repositories.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -34,5 +35,11 @@ public class PersonService {
     public List<PersonDTO> listAll(){
         List<Person> people = personRepository.findAll();
         return people.stream().map(personMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public PersonDTO findById(Long id) throws PersonNotFoundException {
+        Person person = personRepository.findById(id)
+                .orElseThrow(() -> new PersonNotFoundException(id));
+        return personMapper.toDTO(person);
     }
 }
